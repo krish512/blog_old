@@ -3,7 +3,7 @@ module.exports = {
     title: 'Just Another Tech Blog',
     author: 'Krishna Modi',
     description: 'Personal blog of a DevOps guy, talking about Infrastructure as Code, Automation and making life fun',
-    siteUrl: 'https://krish512.com/',
+    siteUrl: 'https://krish512.com',
   },
   pathPrefix: '/',
   plugins: [
@@ -57,6 +57,7 @@ module.exports = {
         icon: `src/assets/gatsby-icon.png`,
       },
     },
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
