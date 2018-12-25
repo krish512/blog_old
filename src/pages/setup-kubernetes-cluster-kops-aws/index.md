@@ -1,9 +1,9 @@
 ---
-title: How to Setup a Perfect Kubernetes Cluster using KOPS in AWS
-date: "2018-12-10T22:40:32.169Z"
+title: How to Setup a Perfect Kubernetes Cluster using KOPS on AWS
+date: "2018-12-25T16:00:00.169Z"
 ---
 
-![alt text](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS in AWS")
+![alt text](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS on AWS")
 
 Kubernetes is currently the most popular container orchestration system and has definitely gained that popularity because of the amazing features and ease of container automation. Even though Kubernetes automates most of the container lifecycle processes, setting up a Kubernetes cluster has been a big pain point. With Kops, it makes setting up a cluster so darn easy that it just works without much hassle!
 
