@@ -3,9 +3,11 @@ title: How to Setup a Perfect Kubernetes Cluster using KOPS in AWS
 date: "2018-12-10T22:40:32.169Z"
 ---
 
-Kubernetes is currently the most popular container orchestration system and has definitely gained that popularity becuase of the amazing features and ease of automation. Even though Kubernetes automates most of the container lifecycle process, setting up a Kubernetes cluster has been a big pain point. With Kops, it makes setting up a cluster so darn easy that it just works without much hassle!
+![alt text](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS in AWS")
 
-Even though Kops makes it a cake wake to create Kubernetes cluster, there are some best practises we need to ensure so that we create an optimal K8S cluster.
+Kubernetes is currently the most popular container orchestration system and has definitely gained that popularity because of the amazing features and ease of container automation. Even though Kubernetes automates most of the container lifecycle processes, setting up a Kubernetes cluster has been a big pain point. With Kops, it makes setting up a cluster so darn easy that it just works without much hassle!
+
+Even though Kops makes it a cake walk to create Kubernetes cluster, there are some best practices we need to ensure so that we create an optimal K8S cluster.
 
 Today, I'll walk you through the detailed steps to create a Kubernetes cluster with 3 master nodes and 2 worker nodes with 1 AWS On-demand instance and 1 AWS Spot instance within a private topology with multi-availability zones deployment.
 
@@ -84,7 +86,7 @@ And finally, we'll have the name of the cluster as our final environment variabl
 $ export NAME=krish512.com
 ```
 
-To avoid entering the variables everytime, let us add these to the ~/.bash_profile
+To avoid entering the variables every time, let us add these to the ~/.bash_profile
 
 Open bash profile using vim as,
 
@@ -114,7 +116,7 @@ With this, we can use the following command to create our cluster config which w
 $ kops create cluster --zones ap-south-1a,ap-south-1b --topology private --networking calico --master-size t2.micro --master-count 3 --node-size t2.large ${NAME}
 ```
 
-Our cluster will be using only private IPs and external access will be only via the load balancer, hence our topology will be `private`. As Calico has the best performance and features such as CNI, we'll keep our networking as `Calico`. Lastly, we'll have 3 master nodes of type `t2.micro` and worker node of type `t2.large`. You can plan your instance types based on your requirements and pricing, [ec2instances.info](https://ec2instances.info/) is a good resource to compare EC2 pricings
+Our cluster will be using only private IPs and external access will be only via the load balancer, hence our topology will be `private`. As Calico has the best performance and features such as CNI, we'll keep our networking as `Calico`. Lastly, we'll have 3 master nodes of type `t2.micro` and worker node of type `t2.large`. You can plan your instance types based on your requirements and pricing, [ec2instances.info](https://ec2instances.info/) is a good resource to compare EC2 pricing
 
 To be able to access the cluster nodes via ssh, we need to add a key. Use the following command to add an existing key to be used with the cluster
 
@@ -303,13 +305,13 @@ spec:
   - ap-south-1b
 ```
 
-We'll not modify the spot instance nodes
+We'll now modify the spot instance nodes
 
 ```bash
 $ kops edit ig --name=${NAME} nodes-spot
 ```
 
-Replace or edit the content to match the following yaml. The `maxPrice` key is to specify that the instance's lifecyle is spot and that the max bidding price we are willing to pay is `0.05$ / hour`. The max price cannot exceed the instance's on-demand price. Modify this as per your need based on the instance type you choose. We have also kept the `maxSize` as 2 so that the nodes can autoscale in case the resource utilisation is near peak
+Replace or edit the content to match the following yaml. The `maxPrice` key is to specify that the instance's lifecyle is spot and that the max bidding price we are willing to pay is `0.05$ / hour`. The max price cannot exceed the instance's on-demand price. Modify this as per your need based on the instance type you choose. We have also kept the `maxSize` as 2 so that the nodes can autoscale in case the resource utilization is near peak
 
 ```yaml
 apiVersion: kops/v1alpha2
@@ -386,6 +388,8 @@ This will check for upgrade and execute a preview of upgrade. To accept and exec
 ```bash
 $ kops upgrade cluster ${NAME} --yes
 ```
+
+Refer [kops git repo](https://github.com/kubernetes/kops) for more details
 
 ## Conclusion
 

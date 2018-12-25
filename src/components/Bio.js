@@ -29,7 +29,6 @@ class Bio extends React.Component {
           }}
         />
         <p>
-          Personal blog by <strong>Krishna Modi</strong>, a DevOps guy, talking mostly about Infrastructure as Code, Automation and fun stuff.
           <div style={{ display: 'flex', flexDirection: 'row', marginRight: '20px' }}>
             <a href="https://facebook.com/krish512/" target="_blank" rel="noopener noreferrer" style={{ boxShadow: 'none', paddingRight: '20px' }}>
               <FaFacebookF color={'#3B5998'} size={20} />
@@ -50,6 +49,7 @@ class Bio extends React.Component {
               <FaMedium color={'#000'} size={20} />
             </a>
           </div>
+          Personal blog by <strong>Krishna Modi</strong>, a DevOps guy, talking mostly about Infrastructure as Code, Automation and fun stuff.
         </p>
       </div>
     )
