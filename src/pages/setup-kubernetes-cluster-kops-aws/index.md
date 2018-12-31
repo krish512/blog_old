@@ -150,7 +150,7 @@ We'll now create a new instance group for spot instances. Skip this if you don't
 $ kops create ig nodes-spot --role node --subnet ap-south-1a,ap-south-1b --name ${NAME}
 ```
 
-Let us edit all the instance groups to add Cloud labels which are useful for expense separation based on resource tags.
+Let us edit all the instance groups to add Cloud labels which are useful for expense separation based on resource tags. Also, as our masters nodes are t2.micro, the server memory is 1 GB which may not be sufficient for the masters. Hence, we’ll be adding 2 GB of SWAP space so that the masters do not go down due to lack of enough leg space. You may make this change even in the nodes if you require, not recommended!
 
 We'll start with the 3 masters.
 For master 1,
@@ -175,6 +175,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1a-1
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
@@ -212,6 +220,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1a-2
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
@@ -250,6 +266,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1b-1
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
