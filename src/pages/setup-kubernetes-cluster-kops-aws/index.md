@@ -1,9 +1,9 @@
 ---
-title: How to Setup a Perfect Kubernetes Cluster using KOPS in AWS
-date: "2018-12-10T22:40:32.169Z"
+title: How to Setup a Perfect Kubernetes Cluster using KOPS on AWS
+date: "2018-12-25T16:00:00.169Z"
 ---
 
-![alt text](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS in AWS")
+![Setup a Perfect Kubernetes Cluster using KOPS on AWS](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS on AWS")
 
 Kubernetes is currently the most popular container orchestration system and has definitely gained that popularity because of the amazing features and ease of container automation. Even though Kubernetes automates most of the container lifecycle processes, setting up a Kubernetes cluster has been a big pain point. With Kops, it makes setting up a cluster so darn easy that it just works without much hassle!
 
@@ -150,7 +150,7 @@ We'll now create a new instance group for spot instances. Skip this if you don't
 $ kops create ig nodes-spot --role node --subnet ap-south-1a,ap-south-1b --name ${NAME}
 ```
 
-Let us edit all the instance groups to add Cloud labels which are useful for expense separation based on resource tags.
+Let us edit all the instance groups to add Cloud labels which are useful for expense separation based on resource tags. Also, as our masters nodes are t2.micro, the server memory is 1 GB which may not be sufficient for the masters. Hence, we’ll be adding 2 GB of SWAP space so that the masters do not go down due to lack of enough leg space. You may make this change even in the nodes if you require, not recommended!
 
 We'll start with the 3 masters.
 For master 1,
@@ -175,6 +175,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1a-1
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
@@ -212,6 +220,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1a-2
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
@@ -250,6 +266,14 @@ metadata:
     Team: DevOps
   name: master-ap-south-1b-1
 spec:
+  additionalUserData:
+  - name: swap.txt
+    type: text/cloud-config
+    content: |
+      #cloud-config
+      swap:
+        filename: /swapfile
+        size: 2147483648
   cloudLabels:
     Environment: Development
     Project: Kubernetes
@@ -393,4 +417,4 @@ Refer [kops git repo](https://github.com/kubernetes/kops) for more details
 
 ## Conclusion
 
-We've successfully setup our Kubernetes cluster on AWS Cloud within a Virtual Private Network and accessible using the api load balancer. Follow the steps from the my next posts to [install Kubernetes Dashboard]() for a management UI and to [setup Ambassador as an API gateway]() for services within the cluster.
+We've successfully setup our Kubernetes cluster on AWS Cloud within a Virtual Private Network and accessible using the api load balancer. Follow the steps from the my next posts to [install Kubernetes Dashboard](/install-kubernetes-dashboard) for a management UI and to [setup Ambassador as an API gateway](/create-api-gateway-ambassador-kubernetes/) for services within the cluster.
