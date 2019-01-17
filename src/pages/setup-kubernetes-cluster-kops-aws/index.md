@@ -3,7 +3,7 @@ title: How to Setup a Perfect Kubernetes Cluster using KOPS on AWS
 date: "2018-12-25T16:00:00.169Z"
 ---
 
-![alt text](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS on AWS")
+![Setup a Perfect Kubernetes Cluster using KOPS on AWS](k8s-kops-aws.jpg "Setup a Perfect Kubernetes Cluster using KOPS on AWS")
 
 Kubernetes is currently the most popular container orchestration system and has definitely gained that popularity because of the amazing features and ease of container automation. Even though Kubernetes automates most of the container lifecycle processes, setting up a Kubernetes cluster has been a big pain point. With Kops, it makes setting up a cluster so darn easy that it just works without much hassle!
 
@@ -417,4 +417,4 @@ Refer [kops git repo](https://github.com/kubernetes/kops) for more details
 
 ## Conclusion
 
-We've successfully setup our Kubernetes cluster on AWS Cloud within a Virtual Private Network and accessible using the api load balancer. Follow the steps from the my next posts to [install Kubernetes Dashboard]() for a management UI and to [setup Ambassador as an API gateway]() for services within the cluster.
+We've successfully setup our Kubernetes cluster on AWS Cloud within a Virtual Private Network and accessible using the api load balancer. Follow the steps from the my next posts to [install Kubernetes Dashboard](/install-kubernetes-dashboard) for a management UI and to [setup Ambassador as an API gateway](/create-api-gateway-ambassador-kubernetes/) for services within the cluster.
