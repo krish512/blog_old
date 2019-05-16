@@ -256,7 +256,7 @@ metadata:
       apiVersion: ambassador/v1
       kind: Mapping
       name: nginx-service_mapping
-      host: service2.dev.pharmeasy.in
+      host: service2.dev.krish512.com
       prefix: /nginx
       service: nginx-service.development:80
 spec:
